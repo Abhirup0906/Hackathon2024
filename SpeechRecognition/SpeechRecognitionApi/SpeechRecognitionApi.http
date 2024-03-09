@@ -1,0 +1,6 @@
+@SpeechRecognitionApi_HostAddress = http://localhost:5268
+
+GET {{SpeechRecognitionApi_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
