@@ -1,0 +1,21 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/DotNet8Api/DotNet8Api/bin/Debug/net8.0
+/DotNet8Api/.vs/DotNet8Api
+/.vs
+/DotNet8Api/DotNet8Api/obj
+/DotNet8Api/DotNet8Api.Db/bin/Debug/net8.0
+/DotNet8Api/DotNet8Api.Db/obj
+/DotNet8Api/DotNet8Api.Model/bin/Debug/net8.0
+/DotNet8Api/DotNet8Api.Model/obj
+/DotNet8Api/DotNet8Api.Orchestrator/bin/Debug/net8.0
+/DotNet8Api/DotNet8Api.Orchestrator/obj
+/DotNet8Api/.vs/ProjectEvaluation
+/SpeechRecognition/.vs/SpeechRecognition/FileContentIndex
+/SpeechRecognition/.vs/SpeechRecognition
+/SpeechRecognition/SpeechRecognitionApi/bin/Debug/net8.0
+/SpeechRecognition/SpeechRecognitionApi/obj
+/SpeechRecognition/.vs/ProjectEvaluation
+/SpeechRecognition/SpeechRecognition.BL/obj
