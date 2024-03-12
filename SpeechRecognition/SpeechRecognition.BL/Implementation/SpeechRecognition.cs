@@ -1,7 +1,10 @@
 ﻿using Microsoft.CognitiveServices.Speech;
 using Microsoft.CognitiveServices.Speech.Audio;
 using Microsoft.CognitiveServices.Speech.Speaker;
+using Microsoft.EntityFrameworkCore;
 using SpeechRecognition.BL.Contract;
+using SpeechRecognition.BL.Db;
+using SpeechRecognition.BL.Db.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,10 +16,43 @@ namespace SpeechRecognition.BL.Implementation
 {
     public class SpeechRecognition : ISpeechRecognition
     {
-        public SpeechRecognition(SpeakerRecognitionClient serviceCLient)
+        private readonly SrContext _srContext;
+        public SpeechRecognition(SpeakerRecognitionClient serviceCLient, SrContext srContext)
         {
-            
+            _srContext = srContext;            
         }
+
+        public async Task RegisterNewUser(string userId, string userName, string profileId) 
+        { 
+            var existingUser = await _srContext.Users.FirstOrDefaultAsync(x => x.UserId == userId);
+            if (existingUser == null) 
+            {
+                var newUser = new User() { UserId = userId, UserName = userName, ProfileId = profileId };
+                _srContext.Users.Add(newUser);
+                await _srContext.SaveChangesAsync();
+            }
+
+        }
+
+        public async Task<string> GetUserProfileId(string userId)
+        {
+            var existingUser = await _srContext.Users.FirstOrDefaultAsync(x => x.UserId == userId);
+            if (existingUser != null) {
+                return existingUser.ProfileId;
+            }
+            return string.Empty;
+        }
+
+        public async Task<User?> GetUserByProfileId(string profileId)
+        {
+            var existingUser = await _srContext.Users.FirstOrDefaultAsync(x => x.ProfileId == profileId);
+            if (existingUser != null)
+            {
+                return existingUser;
+            }
+            return null;
+        }
+
 
         public static async Task VerificationEnroll(SpeechConfig config, Dictionary<string, string> profileMapping)
         {
